@@ -31,8 +31,8 @@ public abstract class GameScenes{
 	public static final int GAME_WIDTH = 760;
 	public static final int GAME_HEIGHT = 640;
 	
-	public abstract void customEvents();
-	public abstract void customButtons();
+	public abstract void sceneEvents();
+	public abstract void sceneButtons();
 	
 	public GameScenes(Stage primaryStage, String pathToBackGround){
 		this.primaryStage = primaryStage;

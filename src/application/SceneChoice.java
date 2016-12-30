@@ -50,30 +50,27 @@ public class SceneChoice extends GameScenes{
 	
 	
 	/**
-	 * For choices, each button has an event applied to it. 
+	 * Buttons must be linked on a one to one basis for most practical ease of use
 	 */
 	@Override
-	public void customEvents() {
-		choiceButtons[0].setOnMouseClicked(e -> {
-			primaryStage.setScene(connectedScenes.getPreviousScene());
-			primaryStage.show();
-		});
-		choiceButtons[1].setOnMouseClicked(e -> {
-			primaryStage.setScene(connectedScenes.getPreviousScene());
-			primaryStage.show();
-		});
-		choiceButtons[2].setOnMouseClicked(e -> {
-			primaryStage.setScene(connectedScenes.getPreviousScene());
-			primaryStage.show();
-		});
-		choiceButtons[3].setOnMouseClicked(e -> {
-			primaryStage.setScene(connectedScenes.getPreviousScene());
-			primaryStage.show();
-		});
+	public void sceneEvents() {
+		
+		for(int i = 0; i < choiceButtons.length; i++){
+			final int choice = i;
+			choiceButtons[i].setOnMouseClicked(e -> {
+				if(connectedScenes.getFutureScenes(choice) == null){
+					System.out.println("EMPTY");
+				} 
+				else{
+					primaryStage.setScene(connectedScenes.getFutureScenes(choice));
+					primaryStage.show();
+				}
+			});
+		}
 	}
 
 	@Override
-	public void customButtons() {
+	public void sceneButtons() {
 		// TODO Auto-generated method stub
 		
 	}

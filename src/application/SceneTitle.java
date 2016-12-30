@@ -30,15 +30,15 @@ public class SceneTitle extends GameScenes{
 	}
 
 	@Override
-	public void customEvents() {
+	public void sceneEvents(){
 		framework.setOnMouseClicked(e -> {
-			primaryStage.setScene(connectedScenes.accessFutureScenes(0));
+			primaryStage.setScene(connectedScenes.getFutureScenes(0));
 			primaryStage.show();
 		});
 	}
 
 	@Override
-	public void customButtons() {
+	public void sceneButtons() {
 		// TODO Auto-generated method stub
 		
 	}

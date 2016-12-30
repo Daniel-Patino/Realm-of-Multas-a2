@@ -21,8 +21,19 @@ public class SceneBranch {
 		return previousScene;
 	}
 	
-	public Scene accessFutureScenes(int sceneToAccess){
-		return futureScenes[sceneToAccess];
+	public Scene getFutureScenes(int sceneToAccess){
+		if(futureScenes == null){
+			return null;
+		} 
+		else{
+			if(sceneToAccess >= futureScenes.length){
+				System.out.println("Exceeded futureScene[]");
+				return null;
+			}
+			else{
+				return futureScenes[sceneToAccess];
+			}
+		}
 	}
 	
 	public String toString(){

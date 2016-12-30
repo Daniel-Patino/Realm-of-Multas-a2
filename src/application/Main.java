@@ -23,7 +23,7 @@ public class Main extends Application {
 			 */
 			
 			//SceneFactory newFac = new SceneFactory();
-			String[] choices = {"FILLER", "FILLER", "FILLER", "FILLER"};
+			String[] choices = {"FILLER", "FILLER", "FILLER", "FILLER", "FILLER", "FILLER", "FILLER", "FILLER"};
 			
 			SceneTitle sceneTitle = new SceneTitle(primaryStage, "file:Resource/Images/download.png", "Realm of Multas", false, false);
 			
@@ -33,14 +33,14 @@ public class Main extends Application {
 			Scene[] futureTitleScenes = {sceneChoice.framework};
 			SceneBranch sceneTitleBranch = new SceneBranch(sceneTitle.framework, null, futureTitleScenes);
 			
-			Scene[] futureChoicesSc = null;
+			Scene[] futureChoicesSc = {sceneTitle.framework};
 			SceneBranch sceneChoicesBr = new SceneBranch(sceneChoice.framework, sceneTitle.framework, futureChoicesSc);
 			
 			sceneChoice.appendSceneBranch(sceneChoicesBr);
 			sceneTitle.appendSceneBranch(sceneTitleBranch);
 			
-			sceneChoice.customEvents();
-			sceneTitle.customEvents();
+			sceneChoice.sceneEvents();
+			sceneTitle.sceneEvents();
 			
 			primaryStage.setScene(sceneTitle.getFrameWorkScene());
 			primaryStage.show();
