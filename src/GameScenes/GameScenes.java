@@ -32,7 +32,7 @@ public abstract class GameScenes{
 	public static final int GAME_HEIGHT = 640;
 	
 	public abstract void sceneEvents();
-	public abstract void sceneButtons();
+	public abstract void sceneButtons(boolean isBackBut);
 	
 	public GameScenes(Stage primaryStage, String pathToBackGround){
 		this.primaryStage = primaryStage;

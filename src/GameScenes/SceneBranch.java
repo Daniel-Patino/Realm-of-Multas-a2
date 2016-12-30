@@ -2,6 +2,12 @@ package GameScenes;
 
 import javafx.scene.Scene;
 
+/**
+ * A simpler way to handle scene transition
+ * Inputs are in order of currentScene, previousScene and futureScenes
+ * @author Dsp02_000
+ *
+ */
 public class SceneBranch {
 	private Scene currentScene;
 	private Scene previousScene;

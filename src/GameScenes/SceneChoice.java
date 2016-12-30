@@ -3,6 +3,8 @@ package GameScenes;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +28,8 @@ public abstract class SceneChoice extends GameScenes{
 	public SceneChoice(Stage primaryStage, String pathToBackGround, String[] choices, boolean isBackBut, boolean textBlock) {
 		super(primaryStage, pathToBackGround);
 		loadChoices(choices);
+		sceneButtons(isBackBut);
+		sceneEvents();
 	}
 	
 	public abstract void customEvents();
@@ -62,16 +66,28 @@ public abstract class SceneChoice extends GameScenes{
 				} 
 				else{
 					primaryStage.setScene(connectedScenes.getFutureScenes(choice));
-					primaryStage.show();
 				}
 			});
 		}
+		
+		
 	}
 
 	@Override
-	public void sceneButtons() {
-		// TODO Auto-generated method stub
-		
+	public void sceneButtons(boolean isBackBut) {
+		if(isBackBut){
+			Button backButton = new Button();
+			StackPane.setAlignment(backButton, Pos.BOTTOM_LEFT);
+			
+			backButton.setTranslateX(20);
+			backButton.setTranslateY(-10);
+			backButton.setText("Back");
+			masterPane.getChildren().add(backButton);
+			
+			backButton.setOnMouseClicked(e -> {
+				primaryStage.setScene(connectedScenes.getPreviousScene());
+			});
+		}
 	}
 	
 	public String getSceneName(){

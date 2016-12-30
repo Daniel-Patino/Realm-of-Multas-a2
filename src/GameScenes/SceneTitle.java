@@ -24,10 +24,12 @@ public abstract class SceneTitle extends GameScenes{
 
 	private String sceneClass = "SceneTitle";
 	
-	public SceneTitle(Stage primaryStage, String pathToBackGround, String title, boolean isBackButton, boolean isUserInterface) {
+	public SceneTitle(Stage primaryStage, String pathToBackGround, String title, boolean isBackBut, boolean isUserInterface) {
 		super(primaryStage, pathToBackGround);
 		loadTitle(title, true);
 		fadingText("Click to Start");
+		sceneButtons(isBackBut);
+		sceneEvents();
 	}
 
 	public abstract void customEvents();
@@ -41,7 +43,7 @@ public abstract class SceneTitle extends GameScenes{
 	}
 
 	@Override
-	public void sceneButtons() {
+	public void sceneButtons(boolean isBackBut) {
 		// TODO Auto-generated method stub
 		
 	}
