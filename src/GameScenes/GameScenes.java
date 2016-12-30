@@ -1,4 +1,4 @@
-package application;
+package GameScenes;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -59,7 +59,7 @@ public abstract class GameScenes{
 		framework = new Scene(masterPane, GAME_WIDTH, GAME_HEIGHT);
 	}
 	
-	protected void loadTitle(String title, boolean isTitle){
+	public void loadTitle(String title, boolean isTitle){
 		StackPane textTitle = new StackPane();
 		Text titleToLoad = new Text();
 		

@@ -1,9 +1,11 @@
 package application;
 	
+import AllScenes.HubScene;
+import AllScenes.OpeningScene;
+import GameScenes.SceneBranch;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
@@ -20,30 +22,29 @@ public class Main extends Application {
 			 * 2. Next Define the SceneBranch
 			 * 3. Use the .appendSceneBranch to append the Branch
 			 * 4. Call the customEvents(); 
+			 * 5. Show the very first Scene to run
 			 */
 			
-			//SceneFactory newFac = new SceneFactory();
-			String[] choices = {"FILLER", "FILLER", "FILLER", "FILLER", "FILLER", "FILLER", "FILLER", "FILLER"};
+			OpeningScene ourOpeningScene = new OpeningScene(primaryStage);
+			HubScene ourHubScene = new HubScene(primaryStage);
+
+			Scene[] futureTitleScenes = {ourHubScene.getFrameWorkScene()};
+			SceneBranch sceneTitleBranch = new SceneBranch(ourOpeningScene.getFrameWorkScene(), null, futureTitleScenes);
+			Scene[] futureChoicesSc = {ourOpeningScene.getFrameWorkScene()};
+			SceneBranch sceneChoicesBr = new SceneBranch(ourHubScene.getFrameWorkScene(), ourOpeningScene.getFrameWorkScene(), futureChoicesSc);
 			
-			SceneTitle sceneTitle = new SceneTitle(primaryStage, "file:Resource/Images/download.png", "Realm of Multas", false, false);
+			ourHubScene.appendSceneBranch(sceneChoicesBr);
+			ourOpeningScene.appendSceneBranch(sceneTitleBranch);
 			
-			SceneChoice sceneChoice = new SceneChoice(primaryStage, "file:Resource/Images/download.png", choices, false, false);
-			sceneChoice.loadTitle("CHOICES", false);
+			ourHubScene.sceneEvents();
+			ourOpeningScene.sceneEvents();
 			
-			Scene[] futureTitleScenes = {sceneChoice.framework};
-			SceneBranch sceneTitleBranch = new SceneBranch(sceneTitle.framework, null, futureTitleScenes);
-			
-			Scene[] futureChoicesSc = {sceneTitle.framework};
-			SceneBranch sceneChoicesBr = new SceneBranch(sceneChoice.framework, sceneTitle.framework, futureChoicesSc);
-			
-			sceneChoice.appendSceneBranch(sceneChoicesBr);
-			sceneTitle.appendSceneBranch(sceneTitleBranch);
-			
-			sceneChoice.sceneEvents();
-			sceneTitle.sceneEvents();
-			
-			primaryStage.setScene(sceneTitle.getFrameWorkScene());
+			primaryStage.setScene(ourOpeningScene.getFrameWorkScene());
 			primaryStage.show();
+			
+			
+			
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

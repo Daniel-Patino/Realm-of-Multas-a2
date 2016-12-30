@@ -1,5 +1,6 @@
-package application;
+package GameScenes;
 
+import application.TextEffects;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
  * @author Dsp02_000
  *
  */
-public class SceneTitle extends GameScenes{
+public abstract class SceneTitle extends GameScenes{
 
 	private String sceneClass = "SceneTitle";
 	
@@ -29,6 +30,8 @@ public class SceneTitle extends GameScenes{
 		fadingText("Click to Start");
 	}
 
+	public abstract void customEvents();
+	
 	@Override
 	public void sceneEvents(){
 		framework.setOnMouseClicked(e -> {
