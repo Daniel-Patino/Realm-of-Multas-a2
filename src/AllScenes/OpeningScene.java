@@ -12,7 +12,6 @@ public class OpeningScene extends SceneTitle{
 	
 	public OpeningScene(Stage primaryStage) {
 		super(primaryStage, pathToBackGround, title, isBackButton, isUserInterface);
-
 	}
 
 	@Override

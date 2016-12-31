@@ -45,7 +45,6 @@ public abstract class SceneTitle extends GameScenes{
 	@Override
 	public void sceneButtons(boolean isBackBut) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	private void fadingText(String text){

@@ -3,6 +3,7 @@ package GameScenes;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -41,14 +42,16 @@ public abstract class SceneChoice extends GameScenes{
 	}
 	
 	protected void loadTextBlock(String textBlock){
+		
+		framework.getStylesheets().add(SceneChoice.class.getResource("application.css").toExternalForm());
+		
 		TextArea textToDisplay = new TextArea(textBlock);
+		
 		textToDisplay.setWrapText(true);
-		//textToDisplay.setMouseTransparent(true);
 		textToDisplay.setFocusTraversable(false);
 		textToDisplay.setEditable(false);
 		textToDisplay.setMaxWidth(GAME_WIDTH / 2);
 		textToDisplay.setMaxHeight(GAME_HEIGHT / 2);
-		textToDisplay.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 20; -fx-text-fill: darkred;");
 		contentPane.setCenter(textToDisplay);
 	}
 	
