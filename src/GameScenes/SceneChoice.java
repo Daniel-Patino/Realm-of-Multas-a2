@@ -2,8 +2,10 @@ package GameScenes;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -36,6 +38,18 @@ public abstract class SceneChoice extends GameScenes{
 	
 	public Button accessButton(int buttonToReturn){
 		return choiceButtons[buttonToReturn];
+	}
+	
+	protected void loadTextBlock(String textBlock){
+		TextArea textToDisplay = new TextArea(textBlock);
+		textToDisplay.setWrapText(true);
+		//textToDisplay.setMouseTransparent(true);
+		textToDisplay.setFocusTraversable(false);
+		textToDisplay.setEditable(false);
+		textToDisplay.setMaxWidth(GAME_WIDTH / 2);
+		textToDisplay.setMaxHeight(GAME_HEIGHT / 2);
+		textToDisplay.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 20; -fx-text-fill: darkred;");
+		contentPane.setCenter(textToDisplay);
 	}
 	
 	private void loadChoices(String[] choices){
