@@ -27,11 +27,11 @@ public class HubScene extends SceneChoice{
 		for(int i = 0; i < choiceButtons.length; i++){
 			final int choice = i;
 			choiceButtons[i].setOnMouseClicked(e -> {
-				if(connectedScenes.getFutureScenes(choice) == null){
+				if(getSceneBranch().getFutureScenes(choice) == null){
 					System.out.println("EMPTY");
 				} 
 				else{
-					primaryStage.setScene(connectedScenes.getFutureScenes(choice));
+					getStage().setScene(getSceneBranch().getFutureScenes(choice));
 				}
 			});
 		}

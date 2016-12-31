@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 /**
  * This type of scene is meant to contain a giant block of Text at the center and can be clicked anywhere
- * to move to exit the scene, it could optionally contain a user interface and optionally contain a back
+ * to exit the scene, it could optionally contain a user interface and optionally contain a back
  * button
  * 
  * 1. Title
@@ -40,9 +40,9 @@ public abstract class SceneTitle extends GameScenes{
 
 	@Override
 	public void sceneEvents(){
-		framework.setOnMouseClicked(e -> {
-			primaryStage.setScene(connectedScenes.getFutureScenes(0));
-			primaryStage.show();
+		getFrameWork().setOnMouseClicked(e -> {
+			getStage().setScene(getSceneBranch().getFutureScenes(0));
+			getStage().show();
 		});
 	}
 
@@ -61,7 +61,7 @@ public abstract class SceneTitle extends GameScenes{
 		toFade.setX((GAME_WIDTH / 2) - toFade.getLayoutBounds().getMaxX() / 2);
 		toFade.setY(GAME_HEIGHT - 100); 
 		Text fadingText = apply.fadeInAndOut(toFade, 1.0, 0.01, 1500);
-		contentPane.getChildren().add(fadingText);
+		getBorderPane().getChildren().add(fadingText);
 	}
 	
 	/* ---GETTERS AND SETTERS--- */

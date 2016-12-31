@@ -15,7 +15,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Scenes need to be constructed methodically in the following order for the sake of not confusing myself
+ * This class handles the framework that will define any Scene created in the game, offering methods of retrieving
+ * and manipulating the bones of a scene
+ * 
+ * Scenes as of now are constructed on a StackPane, masterPane, in the following order;
  * UPDATE AS NECESSARY
  * 1. Background Image
  * 2. BorderPane
@@ -26,22 +29,20 @@ import javafx.stage.Stage;
  */
 public abstract class GameScenes{
 	
-	protected Scene framework;
-	protected StackPane masterPane;
-	protected BorderPane contentPane;
-	protected SceneBranch connectedScenes;
-	protected Stage primaryStage;
-	protected NodeUserInterface ui;
-	protected PlayerData player;
-	protected WorldData world;
+	private Scene framework;								/* */
+	private StackPane masterPane;							/* */
+	private BorderPane contentPane;							/* */
+	private SceneBranch connectedScenes;					/* */
+	private Stage primaryStage;								/* */
+	private NodeUserInterface ui;							/* */
+	protected PlayerData player;							/* Contains data on Player */
+	protected WorldData world;								/* Contains data on World */
 	
-	boolean ifSet = false;
+	public static final int GAME_WIDTH = 760;				/* */
+	public static final int GAME_HEIGHT = 640;				/* */
 	
-	public static final int GAME_WIDTH = 760;
-	public static final int GAME_HEIGHT = 640;
-	
-	public abstract void sceneEvents();
-	public abstract void sceneButtons(boolean isBackBut);
+	public abstract void sceneEvents();						/* */
+	public abstract void sceneButtons(boolean isBackBut);	/* */
 	
 	public GameScenes(Stage primaryStage, String pathToBackGround, PlayerData player, WorldData world){
 		this.primaryStage = primaryStage;
@@ -65,6 +66,13 @@ public abstract class GameScenes{
 		}
 	}
 	
+	/**
+	 * Constructs the bones of the Scene, creates the masterPane and uploads the background image onto
+	 * the bottom-most pane, then adds a borderPane on top for the content to define the scene
+	 * here the size of the Scene is set
+	 * 
+	 * @param pathToBackGround	A string with a path to the image to serve as the background
+	 */
 	private void constructScene(String pathToBackGround){
 		
 		masterPane = new StackPane();
@@ -77,6 +85,15 @@ public abstract class GameScenes{
 		framework = new Scene(masterPane, GAME_WIDTH, GAME_HEIGHT);
 	}
 	
+	/**
+	 * Adds the title to the borderPane of the masterPane, the title serves as the text to place on
+	 * the borderPane. The title is always set in the top of the borderPane but depending on the boolean
+	 * parameter, isTitle will determine if it serves as a big or small title. Useful if you want a 
+	 * regional title or if you want a game title
+	 * 
+	 * @param title		The text that will be set as the title of the scene
+	 * @param isTitle	If true the Title will be large and more centered, if false, smaller and closer to the top
+	 */
 	public void loadTitle(String title, boolean isTitle){
 		StackPane textTitle = new StackPane();
 		Text titleToLoad = new Text();
@@ -99,6 +116,11 @@ public abstract class GameScenes{
 		}		
 	}
 	
+	/**
+	 * Sets the background image on the bottom layer of the masterPane
+	 * 
+	 * @param pathToBackGround	The path to the background
+	 */
 	private void loadBackGround(String pathToBackGround){
 		Image image = new Image(pathToBackGround);
 		ImageView imageView = new ImageView();
@@ -126,6 +148,10 @@ public abstract class GameScenes{
 	
 	public SceneBranch getSceneBranch(){
 		return connectedScenes;
+	}
+	
+	public Stage getStage(){
+		return primaryStage;
 	}
 	
 	public GameScenes getThis(){

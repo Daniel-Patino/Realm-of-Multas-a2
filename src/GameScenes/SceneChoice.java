@@ -42,7 +42,7 @@ public abstract class SceneChoice extends GameScenes{
 	
 	protected void loadTextBlock(String textBlock){
 		
-		framework.getStylesheets().add(SceneChoice.class.getResource("application.css").toExternalForm());
+		getFrameWork().getStylesheets().add(SceneChoice.class.getResource("application.css").toExternalForm());
 		
 		TextArea textToDisplay = new TextArea(textBlock);
 		
@@ -51,7 +51,7 @@ public abstract class SceneChoice extends GameScenes{
 		textToDisplay.setEditable(false);
 		textToDisplay.setMaxWidth(GAME_WIDTH / 2);
 		textToDisplay.setMaxHeight(GAME_HEIGHT / 2);
-		contentPane.setCenter(textToDisplay);
+		getBorderPane().setCenter(textToDisplay);
 	}
 	
 	private void loadChoices(String[] choices){
@@ -66,7 +66,7 @@ public abstract class SceneChoice extends GameScenes{
 			choiceButtons[i].setMinSize((GAME_WIDTH / (choices.length * 1.5)), 25);
 			choicesBox.getChildren().add(choiceButtons[i]);
 		}
-		contentPane.setBottom(choicesBox);
+		getBorderPane().setBottom(choicesBox);
 	}
 	
 	@Override
@@ -83,10 +83,10 @@ public abstract class SceneChoice extends GameScenes{
 			backButton.setTranslateX(20);
 			backButton.setTranslateY(-10);
 			backButton.setText("Back");
-			masterPane.getChildren().add(backButton);
+			getMasterPane().getChildren().add(backButton);
 			
 			backButton.setOnMouseClicked(e -> {
-				primaryStage.setScene(connectedScenes.getPreviousScene());
+				getStage().setScene(getSceneBranch().getPreviousScene());
 			});
 		}
 	}
