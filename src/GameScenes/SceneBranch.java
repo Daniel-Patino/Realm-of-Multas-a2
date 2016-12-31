@@ -13,10 +13,14 @@ public class SceneBranch {
 	private Scene previousScene;
 	private Scene[] futureScenes;
 	
-	public SceneBranch(Scene currentScene, Scene previousScene, Scene[] futureScenes){
-		this.currentScene = currentScene;
-		this.previousScene = previousScene;
-		this.futureScenes = futureScenes;
+	public GameScenes[] gameScenes;
+	
+	public SceneBranch(Scene curScene, Scene prevScene, Scene[] futScenes, GameScenes[] gameScenes)
+	{
+		this.currentScene = curScene;
+		this.previousScene = prevScene;
+		this.futureScenes = futScenes;
+		this.gameScenes = gameScenes;
 	}
 	
 	public Scene getCurrentScene(){
@@ -40,6 +44,10 @@ public class SceneBranch {
 				return futureScenes[sceneToAccess];
 			}
 		}
+	}
+	
+	public GameScenes getGameScenes(int gameScene){
+		return gameScenes[gameScene];
 	}
 	
 	public String toString(){

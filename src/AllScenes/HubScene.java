@@ -35,12 +35,12 @@ public class HubScene extends SceneChoice{
 			});
 		}
 		
-		choiceButtons[choiceButtons.length - 1].setOnMouseClicked(e -> {
-			player.setPlayerGold(player.getPlayerGold() + 50);
-			player.setPlayerHealth(player.getPlayerHealth() + 25);
-			StringProperty x = new SimpleStringProperty("Health: " + player.getPlayerHealth() + " Gold: " + player.getPlayerGold());
-			ui.toDisplay.textProperty().bind(x);
-			//primaryStage.setScene(connectedScenes.getFutureScenes(choiceButtons.length - 2));
-		});
+//		choiceButtons[choiceButtons.length - 1].setOnMouseClicked(e -> {
+//			player.setPlayerGold(player.getPlayerGold() + 50);
+//			player.setPlayerHealth(player.getPlayerHealth() + 25);
+//			StringProperty x = new SimpleStringProperty("Health: " + player.getPlayerHealth() + " Gold: " + player.getPlayerGold());
+//			ui.toDisplay.textProperty().bind(x);
+//			connectedScenes.getGameScenes(2).ui.toDisplay.textProperty().bind(x);
+//		});
 	}	
 }

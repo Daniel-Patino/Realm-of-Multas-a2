@@ -1,6 +1,7 @@
 package GameScenes;
 
-import application.GameSceneData;
+import GameData.PlayerData;
+import application.NodeUserInterface;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -28,7 +29,8 @@ public abstract class GameScenes{
 	protected BorderPane contentPane;
 	protected SceneBranch connectedScenes;
 	protected Stage primaryStage;
-	public GameSceneData gameScenes;
+	public NodeUserInterface ui;
+	protected PlayerData player;
 	
 	public static final int GAME_WIDTH = 760;
 	public static final int GAME_HEIGHT = 640;
@@ -36,20 +38,24 @@ public abstract class GameScenes{
 	public abstract void sceneEvents();
 	public abstract void sceneButtons(boolean isBackBut);
 	
-	public GameScenes(Stage primaryStage, String pathToBackGround){
+	public GameScenes(Stage primaryStage, String pathToBackGround, PlayerData player){
 		this.primaryStage = primaryStage;
+		this.player = player;
 		constructScene(pathToBackGround);
+	}
+	
+	protected void loadUserInter(boolean isUI){
+		if(isUI){
+			NodeUserInterface ui = new NodeUserInterface(player, this);
+			this.ui = ui;
+		}
 	}
 	
 	public void appendSceneBranch(SceneBranch connectedScenes){
 		this.connectedScenes = connectedScenes;
 	}
 	
-	public void appendGameScenes(GameSceneData gameScenes){
-		this.gameScenes = gameScenes;
-	}
-	
-	public Scene getFrameWorkScene(){
+	public Scene getFrameWork(){
 		return framework;
 	}
 	

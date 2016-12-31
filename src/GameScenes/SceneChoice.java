@@ -30,11 +30,10 @@ public abstract class SceneChoice extends GameScenes{
 	protected Button[] choiceButtons;
 	private String sceneClass = "SceneChoice";
 	protected PlayerData player;
-	public NodeUserInterface ui;
 	
 	public SceneChoice(Stage primaryStage, String pathToBackGround, String[] choices, boolean isBackBut,
 			boolean textBlock, PlayerData player) {
-		super(primaryStage, pathToBackGround);
+		super(primaryStage, pathToBackGround, player);
 		
 		this.player = player;
 		
@@ -48,12 +47,7 @@ public abstract class SceneChoice extends GameScenes{
 		return choiceButtons[buttonToReturn];
 	}
 	
-	protected void loadUserInter(boolean isUI){
-		if(isUI){
-			NodeUserInterface ui = new NodeUserInterface(player, this);
-			this.ui = ui;
-		}
-	}
+	
 	
 	protected void loadTextBlock(String textBlock){
 		

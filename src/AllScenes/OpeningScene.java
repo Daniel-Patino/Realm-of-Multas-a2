@@ -1,5 +1,6 @@
 package AllScenes;
 
+import GameData.PlayerData;
 import GameScenes.SceneTitle;
 import javafx.stage.Stage;
 
@@ -10,8 +11,8 @@ public class OpeningScene extends SceneTitle{
 	private static boolean isBackButton = false;
 	private static boolean isUserInterface = false;
 	
-	public OpeningScene(Stage primaryStage) {
-		super(primaryStage, pathToBackGround, title, isBackButton, isUserInterface);
+	public OpeningScene(Stage primaryStage, PlayerData player) {
+		super(primaryStage, pathToBackGround, title, isBackButton, isUserInterface, player);
 	}
 
 	@Override

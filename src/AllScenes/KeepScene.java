@@ -49,10 +49,8 @@ public class KeepScene extends SceneChoice{
 			player.setPlayerGold(player.getPlayerGold() + 50);
 			player.setPlayerHealth(player.getPlayerHealth() + 25);
 			StringProperty x = new SimpleStringProperty("Health: " + player.getPlayerHealth() + " Gold: " + player.getPlayerGold());
-			//ui.update("Health: " + player.getPlayerHealth() + " Gold: " + player.getPlayerGold());
 			ui.toDisplay.textProperty().bind(x);
-			gameScenes.choiceDataBase[0].ui.toDisplay.textProperty().bind(x);
-			//primaryStage.setScene(gameScenes.dataBase[1].getFrameWorkScene());
+			connectedScenes.getGameScenes(1).ui.toDisplay.textProperty().bind(x);
 		});
 	}
 }

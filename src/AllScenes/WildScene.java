@@ -4,23 +4,24 @@ import GameData.PlayerData;
 import GameScenes.SceneChoice;
 import javafx.stage.Stage;
 
-public class TownScene extends SceneChoice{
-	
-	private static String pathToBackGround = "file:Resource/Images/906741-town-wallpaper.jpg";
+public class WildScene extends SceneChoice{
+
+	private static String pathToBackGround = "file:Resource/Images/Iceberg-Lake-Mount-Baker-Wilderness-Washington.jpg";
 	private static String[] choices = {"FILLER", "FILLER"};
 	private static boolean isBackBut = true;
 	private static boolean textBlock = false;
-	private static boolean isUI = true;
+	private static boolean isUI = true;	
 	
-	public TownScene(Stage primaryStage, PlayerData player) {
+	public WildScene(Stage primaryStage, PlayerData player) {
 		super(primaryStage, pathToBackGround, choices, isBackBut, textBlock, player);
+		loadTitle("The Wilderness", false);
 		loadUserInter(isUI);
-		loadTitle("The Town", false);
 	}
 
 	@Override
 	public void customEvents() {
-		sceneEvents();
+		// TODO Auto-generated method stub
+		
 	}
 
 }

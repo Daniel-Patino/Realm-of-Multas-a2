@@ -1,5 +1,6 @@
 package GameScenes;
 
+import GameData.PlayerData;
 import application.TextEffects;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -24,8 +25,10 @@ public abstract class SceneTitle extends GameScenes{
 
 	private String sceneClass = "SceneTitle";
 	
-	public SceneTitle(Stage primaryStage, String pathToBackGround, String title, boolean isBackBut, boolean isUserInterface) {
-		super(primaryStage, pathToBackGround);
+	public SceneTitle(Stage primaryStage, String pathToBackGround, String title, boolean isBackBut,
+			boolean isUserInterface, PlayerData player)
+	{
+		super(primaryStage, pathToBackGround, player);
 		loadTitle(title, true);
 		fadingText("Click to Start");
 		sceneButtons(isBackBut);

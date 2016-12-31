@@ -4,6 +4,7 @@ import AllScenes.HubScene;
 import AllScenes.KeepScene;
 import AllScenes.OpeningScene;
 import AllScenes.TownScene;
+import AllScenes.WildScene;
 import GameData.PlayerData;
 import GameScenes.GameScenes;
 import GameScenes.SceneBranch;
@@ -34,42 +35,38 @@ public class Main extends Application {
 			PlayerData ourPlayer = new PlayerData(100, 100);
 			
 			/* 1. Define all GameScenes */
-			OpeningScene ourOpeningScene = new OpeningScene(primaryStage);
-			HubScene ourHubScene = new HubScene(primaryStage, ourPlayer);
-			KeepScene ourKeepScene = new KeepScene(primaryStage, ourPlayer);
-			TownScene ourTownScene = new TownScene(primaryStage, ourPlayer);
+			OpeningScene ourOpeningScene = new OpeningScene(primaryStage, ourPlayer);
+			HubScene hubScene = new HubScene(primaryStage, ourPlayer);
+			KeepScene keepScene = new KeepScene(primaryStage, ourPlayer);
+			TownScene townScene = new TownScene(primaryStage, ourPlayer);
+			WildScene wildScene = new WildScene(primaryStage, ourPlayer);
 			
-			
-			SceneTitle[] titleDataBase = new SceneTitle[1];
-			SceneChoice[] choiceDataBase = new SceneChoice[3];
-			
-			titleDataBase[0] = ourOpeningScene;
-			choiceDataBase[0] = ourHubScene;
-			choiceDataBase[1] = ourKeepScene;
-			choiceDataBase[2] = ourTownScene;
-			GameSceneData gameDataDelux = new GameSceneData(choiceDataBase, titleDataBase);
+			GameScenes[] gameScenes = new GameScenes[5];
+			gameScenes[0] = ourOpeningScene;
+			gameScenes[1] = hubScene;
+			gameScenes[2] = keepScene;
+			gameScenes[3] = townScene;
+			gameScenes[4] = wildScene;
 			
 			/* 2. Define the sceneBranches */
-			Scene[] futureTitleScenes = {ourHubScene.getFrameWorkScene()};
-			Scene[] futureHubSc = {ourKeepScene.getFrameWorkScene(), ourTownScene.getFrameWorkScene()};
-			Scene[] futureKeepSc = null;
-			Scene[] futureTownScene = null;
+			Scene[] futTitleScenes = {hubScene.getFrameWork()};
+			Scene[] futHubSc = {keepScene.getFrameWork(), townScene.getFrameWork(), wildScene.getFrameWork()};
+			Scene[] futKeepSc = null;
+			Scene[] futTownScene = null;
+			Scene[] futWildScene = null;
 			
-			SceneBranch sceneTitleBranch = new SceneBranch(ourOpeningScene.getFrameWorkScene(), null, futureTitleScenes);
-			SceneBranch sceneHubBr = new SceneBranch(ourHubScene.getFrameWorkScene(), ourOpeningScene.getFrameWorkScene(), futureHubSc);
-			SceneBranch sceneKeepBr = new SceneBranch(ourKeepScene.getFrameWorkScene(), ourHubScene.getFrameWorkScene(), futureKeepSc);
-			SceneBranch sceneTownBr = new SceneBranch(ourTownScene.getFrameWorkScene(), ourHubScene.getFrameWorkScene(), futureTownScene);
+			SceneBranch sceneTitleBranch = new SceneBranch(ourOpeningScene.getFrameWork(), null, futTitleScenes, gameScenes);
+			SceneBranch sceneHubBr = new SceneBranch(hubScene.getFrameWork(), ourOpeningScene.getFrameWork(), futHubSc, gameScenes);
+			SceneBranch sceneKeepBr = new SceneBranch(keepScene.getFrameWork(), hubScene.getFrameWork(), futKeepSc, gameScenes);
+			SceneBranch sceneTownBr = new SceneBranch(townScene.getFrameWork(), hubScene.getFrameWork(), futTownScene, gameScenes);
+			SceneBranch sceneWildBr = new SceneBranch(wildScene.getFrameWork(), hubScene.getFrameWork(), futWildScene, gameScenes);
 			
 			/* 3. Use the .appendSceneBranch */
-			ourHubScene.appendGameScenes(gameDataDelux);
-			ourOpeningScene.appendGameScenes(gameDataDelux);
-			ourKeepScene.appendGameScenes(gameDataDelux);
-			ourTownScene.appendGameScenes(gameDataDelux);
-			
-			ourHubScene.appendSceneBranch(sceneHubBr);
+			hubScene.appendSceneBranch(sceneHubBr);
 			ourOpeningScene.appendSceneBranch(sceneTitleBranch);
-			ourKeepScene.appendSceneBranch(sceneKeepBr);
-			ourTownScene.appendSceneBranch(sceneTownBr);
+			keepScene.appendSceneBranch(sceneKeepBr);
+			townScene.appendSceneBranch(sceneTownBr);
+			wildScene.appendSceneBranch(sceneWildBr);
 			
 			/* 4. Call the customeEvents() */
 			//ourHubScene.customEvents();
@@ -78,7 +75,7 @@ public class Main extends Application {
 			//ourTownScene.customEvents();
 			
 			/* 5. Run opening Scene*/
-			primaryStage.setScene(ourOpeningScene.getFrameWorkScene());
+			primaryStage.setScene(ourOpeningScene.getFrameWork());
 			primaryStage.show();
 			
 		} catch(Exception e) {
