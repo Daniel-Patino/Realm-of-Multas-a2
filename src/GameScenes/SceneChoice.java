@@ -1,5 +1,7 @@
 package GameScenes;
 
+import GameData.PlayerData;
+import application.NodeUserInterface;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,20 +27,32 @@ import javafx.stage.Stage;
  */
 public abstract class SceneChoice extends GameScenes{
 
-	private Button[] choiceButtons;
+	protected Button[] choiceButtons;
 	private String sceneClass = "SceneChoice";
+	protected PlayerData player;
+	public NodeUserInterface ui;
 	
-	public SceneChoice(Stage primaryStage, String pathToBackGround, String[] choices, boolean isBackBut, boolean textBlock) {
+	public SceneChoice(Stage primaryStage, String pathToBackGround, String[] choices, boolean isBackBut,
+			boolean textBlock, PlayerData player) {
 		super(primaryStage, pathToBackGround);
+		
+		this.player = player;
+		
 		loadChoices(choices);
 		sceneButtons(isBackBut);
-		sceneEvents();
 	}
 	
 	public abstract void customEvents();
 	
 	public Button accessButton(int buttonToReturn){
 		return choiceButtons[buttonToReturn];
+	}
+	
+	protected void loadUserInter(boolean isUI){
+		if(isUI){
+			NodeUserInterface ui = new NodeUserInterface(player, this);
+			this.ui = ui;
+		}
 	}
 	
 	protected void loadTextBlock(String textBlock){
@@ -70,23 +84,8 @@ public abstract class SceneChoice extends GameScenes{
 		contentPane.setBottom(choicesBox);
 	}
 	
-	/**
-	 * Buttons must be linked on a one to one basis for most practical ease of use
-	 */
 	@Override
 	public void sceneEvents() {	
-		for(int i = 0; i < choiceButtons.length; i++){
-			final int choice = i;
-			choiceButtons[i].setOnMouseClicked(e -> {
-				if(connectedScenes.getFutureScenes(choice) == null){
-					System.out.println("EMPTY");
-				} 
-				else{
-					primaryStage.setScene(connectedScenes.getFutureScenes(choice));
-				}
-			});
-		}
-		
 		
 	}
 

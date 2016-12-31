@@ -16,6 +16,6 @@ public class OpeningScene extends SceneTitle{
 
 	@Override
 	public void customEvents() {
-		
+			
 	}
 }

@@ -1,5 +1,6 @@
 package GameScenes;
 
+import application.GameSceneData;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -27,6 +28,7 @@ public abstract class GameScenes{
 	protected BorderPane contentPane;
 	protected SceneBranch connectedScenes;
 	protected Stage primaryStage;
+	public GameSceneData gameScenes;
 	
 	public static final int GAME_WIDTH = 760;
 	public static final int GAME_HEIGHT = 640;
@@ -43,8 +45,28 @@ public abstract class GameScenes{
 		this.connectedScenes = connectedScenes;
 	}
 	
+	public void appendGameScenes(GameSceneData gameScenes){
+		this.gameScenes = gameScenes;
+	}
+	
 	public Scene getFrameWorkScene(){
 		return framework;
+	}
+	
+	public StackPane getMasterPane(){
+		return masterPane;
+	}
+	
+	public void replaceBorderPane(BorderPane toReplace){
+		contentPane = toReplace;
+	}
+	
+	public void replaceMasterPane(StackPane toReplace){
+		masterPane = toReplace;
+	}
+	
+	public BorderPane getBorderPane(){
+		return contentPane;
 	}
 	
 	private void constructScene(String pathToBackGround){
