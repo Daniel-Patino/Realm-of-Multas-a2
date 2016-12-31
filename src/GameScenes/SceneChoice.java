@@ -1,13 +1,10 @@
 package GameScenes;
 
 import GameData.PlayerData;
-import application.NodeUserInterface;
+import GameData.WorldData;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -31,23 +28,17 @@ public abstract class SceneChoice extends GameScenes{
 	private String sceneClass = "SceneChoice";
 	protected PlayerData player;
 	
+	public abstract void customEvents();
+	
 	public SceneChoice(Stage primaryStage, String pathToBackGround, String[] choices, boolean isBackBut,
-			boolean textBlock, PlayerData player) {
-		super(primaryStage, pathToBackGround, player);
+			boolean textBlock, PlayerData player, WorldData world) {
+		super(primaryStage, pathToBackGround, player, world);
 		
 		this.player = player;
 		
 		loadChoices(choices);
 		sceneButtons(isBackBut);
 	}
-	
-	public abstract void customEvents();
-	
-	public Button accessButton(int buttonToReturn){
-		return choiceButtons[buttonToReturn];
-	}
-	
-	
 	
 	protected void loadTextBlock(String textBlock){
 		
@@ -98,6 +89,12 @@ public abstract class SceneChoice extends GameScenes{
 				primaryStage.setScene(connectedScenes.getPreviousScene());
 			});
 		}
+	}
+	
+	/* ---GETTERS AND SETTERS--- */
+	
+	public Button getButton(int buttonToReturn){
+		return choiceButtons[buttonToReturn];
 	}
 	
 	public String getSceneName(){

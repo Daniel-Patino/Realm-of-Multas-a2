@@ -1,6 +1,7 @@
 package GameScenes;
 
 import GameData.PlayerData;
+import GameData.WorldData;
 import application.TextEffects;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -25,18 +26,18 @@ public abstract class SceneTitle extends GameScenes{
 
 	private String sceneClass = "SceneTitle";
 	
+	public abstract void customEvents();
+	
 	public SceneTitle(Stage primaryStage, String pathToBackGround, String title, boolean isBackBut,
-			boolean isUserInterface, PlayerData player)
+			boolean isUserInterface, PlayerData player, WorldData world)
 	{
-		super(primaryStage, pathToBackGround, player);
+		super(primaryStage, pathToBackGround, player, world);
 		loadTitle(title, true);
 		fadingText("Click to Start");
 		sceneButtons(isBackBut);
 		sceneEvents();
 	}
 
-	public abstract void customEvents();
-	
 	@Override
 	public void sceneEvents(){
 		framework.setOnMouseClicked(e -> {
@@ -59,11 +60,11 @@ public abstract class SceneTitle extends GameScenes{
 		toFade.setFont(Font.font("Mistral", FontWeight.BOLD, 24));
 		toFade.setX((GAME_WIDTH / 2) - toFade.getLayoutBounds().getMaxX() / 2);
 		toFade.setY(GAME_HEIGHT - 100); 
-		
 		Text fadingText = apply.fadeInAndOut(toFade, 1.0, 0.01, 1500);
-		
 		contentPane.getChildren().add(fadingText);
 	}
+	
+	/* ---GETTERS AND SETTERS--- */
 	
 	public String getSceneName(){
 		return sceneClass;

@@ -1,6 +1,7 @@
 package GameScenes;
 
 import GameData.PlayerData;
+import GameData.WorldData;
 import application.NodeUserInterface;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
  * UPDATE AS NECESSARY
  * 1. Background Image
  * 2. BorderPane
+ * 3. UserInterface
  * 		...
  * @author Dsp02_000
  *
@@ -29,8 +31,11 @@ public abstract class GameScenes{
 	protected BorderPane contentPane;
 	protected SceneBranch connectedScenes;
 	protected Stage primaryStage;
-	public NodeUserInterface ui;
+	protected NodeUserInterface ui;
 	protected PlayerData player;
+	protected WorldData world;
+	
+	boolean ifSet = false;
 	
 	public static final int GAME_WIDTH = 760;
 	public static final int GAME_HEIGHT = 640;
@@ -38,41 +43,26 @@ public abstract class GameScenes{
 	public abstract void sceneEvents();
 	public abstract void sceneButtons(boolean isBackBut);
 	
-	public GameScenes(Stage primaryStage, String pathToBackGround, PlayerData player){
+	public GameScenes(Stage primaryStage, String pathToBackGround, PlayerData player, WorldData world){
 		this.primaryStage = primaryStage;
 		this.player = player;
+		this.world = world;
 		constructScene(pathToBackGround);
 	}
 	
+	/**
+	 * This instantiates the User Interface, it must be called inside of the customEvents located in the
+	 * grand children of this methods.
+	 * 
+	 * @param isUI	True or False to indicate whether the UI is created or not
+	 */
 	protected void loadUserInter(boolean isUI){
 		if(isUI){
-			NodeUserInterface ui = new NodeUserInterface(player, this);
+			NodeUserInterface ui = new NodeUserInterface(player, world, this, connectedScenes);
 			this.ui = ui;
+		} else {
+			this.ui = null;
 		}
-	}
-	
-	public void appendSceneBranch(SceneBranch connectedScenes){
-		this.connectedScenes = connectedScenes;
-	}
-	
-	public Scene getFrameWork(){
-		return framework;
-	}
-	
-	public StackPane getMasterPane(){
-		return masterPane;
-	}
-	
-	public void replaceBorderPane(BorderPane toReplace){
-		contentPane = toReplace;
-	}
-	
-	public void replaceMasterPane(StackPane toReplace){
-		masterPane = toReplace;
-	}
-	
-	public BorderPane getBorderPane(){
-		return contentPane;
 	}
 	
 	private void constructScene(String pathToBackGround){
@@ -114,5 +104,43 @@ public abstract class GameScenes{
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 		masterPane.getChildren().add(imageView);
+	}
+	
+	/* ---GETTERS AND SETTERS--- */
+	
+	public Scene getFrameWork(){
+		return framework;
+	}
+	
+	public StackPane getMasterPane(){
+		return masterPane;
+	}
+	
+	public BorderPane getBorderPane(){
+		return contentPane;
+	}
+	
+	public NodeUserInterface getUI(){
+		return ui;
+	}
+	
+	public SceneBranch getSceneBranch(){
+		return connectedScenes;
+	}
+	
+	public GameScenes getThis(){
+		return this;
+	}
+	
+	public void setBorderPane(BorderPane contentPane){
+		this.contentPane = contentPane;
+	}
+	
+	public void setMasterPane(StackPane masterPane){
+		this.masterPane = masterPane;
+	}
+	
+	public void setSceneBranch(SceneBranch connectedScenes){
+		this.connectedScenes = connectedScenes;
 	}
 }

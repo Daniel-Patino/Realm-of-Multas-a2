@@ -1,9 +1,8 @@
 package AllScenes;
 
 import GameData.PlayerData;
+import GameData.WorldData;
 import GameScenes.SceneChoice;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.stage.Stage;
 
 public class HubScene extends SceneChoice{
@@ -14,15 +13,17 @@ public class HubScene extends SceneChoice{
 	private static boolean textBlock = false;
 	private static boolean isUI = true;
 	
-	public HubScene(Stage primaryStage, PlayerData player) {
-		super(primaryStage, pathToBackGround, choices, isBackBut, textBlock, player);
+	public HubScene(Stage primaryStage, PlayerData player, WorldData world) {
+		super(primaryStage, pathToBackGround, choices, isBackBut, textBlock, player, world);
 		loadTitle("The Realm of Multas", false);
-		loadUserInter(isUI);
-		customEvents();
+		//customEvents();
 	}
 
 	@Override
 	public void customEvents() {
+		
+		loadUserInter(isUI);
+
 		for(int i = 0; i < choiceButtons.length; i++){
 			final int choice = i;
 			choiceButtons[i].setOnMouseClicked(e -> {

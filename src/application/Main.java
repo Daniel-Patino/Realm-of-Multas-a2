@@ -6,10 +6,9 @@ import AllScenes.OpeningScene;
 import AllScenes.TownScene;
 import AllScenes.WildScene;
 import GameData.PlayerData;
+import GameData.WorldData;
 import GameScenes.GameScenes;
 import GameScenes.SceneBranch;
-import GameScenes.SceneChoice;
-import GameScenes.SceneTitle;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -33,16 +32,17 @@ public class Main extends Application {
 			 */
 			
 			PlayerData ourPlayer = new PlayerData(100, 100);
+			WorldData ourWorld = new WorldData(0);
 			
 			/* 1. Define all GameScenes */
-			OpeningScene ourOpeningScene = new OpeningScene(primaryStage, ourPlayer);
-			HubScene hubScene = new HubScene(primaryStage, ourPlayer);
-			KeepScene keepScene = new KeepScene(primaryStage, ourPlayer);
-			TownScene townScene = new TownScene(primaryStage, ourPlayer);
-			WildScene wildScene = new WildScene(primaryStage, ourPlayer);
+			OpeningScene openScene = new OpeningScene(primaryStage, ourPlayer, ourWorld);
+			HubScene hubScene = new HubScene(primaryStage, ourPlayer, ourWorld);
+			KeepScene keepScene = new KeepScene(primaryStage, ourPlayer, ourWorld);
+			TownScene townScene = new TownScene(primaryStage, ourPlayer, ourWorld);
+			WildScene wildScene = new WildScene(primaryStage, ourPlayer, ourWorld);
 			
 			GameScenes[] gameScenes = new GameScenes[5];
-			gameScenes[0] = ourOpeningScene;
+			gameScenes[0] = openScene;
 			gameScenes[1] = hubScene;
 			gameScenes[2] = keepScene;
 			gameScenes[3] = townScene;
@@ -55,27 +55,28 @@ public class Main extends Application {
 			Scene[] futTownScene = null;
 			Scene[] futWildScene = null;
 			
-			SceneBranch sceneTitleBranch = new SceneBranch(ourOpeningScene.getFrameWork(), null, futTitleScenes, gameScenes);
-			SceneBranch sceneHubBr = new SceneBranch(hubScene.getFrameWork(), ourOpeningScene.getFrameWork(), futHubSc, gameScenes);
+			SceneBranch sceneTitleBranch = new SceneBranch(openScene.getFrameWork(), null, futTitleScenes, gameScenes);
+			SceneBranch sceneHubBr = new SceneBranch(hubScene.getFrameWork(), openScene.getFrameWork(), futHubSc, gameScenes);
 			SceneBranch sceneKeepBr = new SceneBranch(keepScene.getFrameWork(), hubScene.getFrameWork(), futKeepSc, gameScenes);
 			SceneBranch sceneTownBr = new SceneBranch(townScene.getFrameWork(), hubScene.getFrameWork(), futTownScene, gameScenes);
 			SceneBranch sceneWildBr = new SceneBranch(wildScene.getFrameWork(), hubScene.getFrameWork(), futWildScene, gameScenes);
 			
 			/* 3. Use the .appendSceneBranch */
-			hubScene.appendSceneBranch(sceneHubBr);
-			ourOpeningScene.appendSceneBranch(sceneTitleBranch);
-			keepScene.appendSceneBranch(sceneKeepBr);
-			townScene.appendSceneBranch(sceneTownBr);
-			wildScene.appendSceneBranch(sceneWildBr);
+			hubScene.setSceneBranch(sceneHubBr);
+			openScene.setSceneBranch(sceneTitleBranch);
+			keepScene.setSceneBranch(sceneKeepBr);
+			townScene.setSceneBranch(sceneTownBr);
+			wildScene.setSceneBranch(sceneWildBr);
 			
 			/* 4. Call the customeEvents() */
-			//ourHubScene.customEvents();
-			//ourOpeningScene.customEvents();
-			//ourKeepScene.customEvents();
-			//ourTownScene.customEvents();
+			openScene.customEvents();
+			hubScene.customEvents();
+			keepScene.customEvents();
+			townScene.customEvents();
+			wildScene.customEvents();
 			
 			/* 5. Run opening Scene*/
-			primaryStage.setScene(ourOpeningScene.getFrameWork());
+			primaryStage.setScene(openScene.getFrameWork());
 			primaryStage.show();
 			
 		} catch(Exception e) {
